@@ -1,4 +1,18 @@
+// Add event listener for the 
 document.getElementById('send-button').addEventListener('click', async () => {
+    sendMessage();
+});
+
+// Add event listener for the Enter key
+document.getElementById('user-input').addEventListener('keydown', async (event) => {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // Prevent the default Enter key behavior (e.g., form submission)
+        sendMessage();
+    }
+});
+
+// Function to send the message
+async function sendMessage() {
     const userInput = document.getElementById('user-input').value;
     if (!userInput) return;
 
@@ -8,6 +22,13 @@ document.getElementById('send-button').addEventListener('click', async () => {
     userMessage.textContent = `${userInput}`;
     userMessage.classList.add('user-message');
     messages.appendChild(userMessage);
+
+    const welcomeMessage = document.getElementById('welcome-message');
+    
+    // Remove the welcome message if it exists
+    if (welcomeMessage) {
+        welcomeMessage.style.display = 'none';
+    }
 
     // Clear input field
     document.getElementById('user-input').value = '';
@@ -41,4 +62,4 @@ document.getElementById('send-button').addEventListener('click', async () => {
 
     // Scroll to the bottom of the chat
     messages.scrollTop = messages.scrollHeight;
-});
+}

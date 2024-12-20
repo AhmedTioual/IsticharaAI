@@ -1,9 +1,11 @@
+@import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+
 /* General Reset */
 body, html {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Droid Arabic Kufi', serif;
     height: 100%;                /* Ensure body takes up full height */
     width: 100%;                 /* Ensure body takes up full width */
     overflow: hidden;            /* Prevent body overflow (scrollbar) */
@@ -100,7 +102,7 @@ body, html {
 }
 
 .user-message, .bot-message, .error-message {
-    padding: 15px;
+    padding: 10px 20px;
     margin-bottom: 10px;
     max-width: 80%;   /* Limit the width of messages */
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -172,4 +174,57 @@ body, html {
     align-items: center;
     justify-content: center;
     flex: 1;
+}
+
+/* Top Bar */
+.top-bar {
+    display: flex;
+    justify-content: flex-end; /* Align content to the right */
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f1f1f1; /* Light gray background */
+    border-radius: 0px; /* Remove rounded corners to span full width */
+    width: 100%; /* Ensure the top bar takes the full width of the page */
+    position: fixed; /* Fix the top bar at the top */
+    top: 0; /* Position at the top of the page */
+    left: 0; /* Align to the left */
+    z-index: -1000; /* Ensure it stays on top of other content */
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 8px; /* Optional shadow */
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 3.5%;
+}
+
+.user-name {
+    font-size: 16px;
+    color: #003366;
+    font-weight: bold;
+}
+
+.user-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Make the image circular */
+    object-fit: cover; /* Ensure the image scales properly */
+    border: 2px solid #003366; /* Optional border */
+}
+
+/* Adjust main content */
+.main-content {
+    padding-top: 60px; /* Add top padding to avoid overlap with the top bar */
+}
+
+/* Welcome message */
+.welcome-message {
+    padding: 15px;
+    margin-top: 15%;
+    border-radius: 5px;
+    text-align: center;
+    color: #003366;
+    font-size: 20px;
+    font-weight: bold;
 }

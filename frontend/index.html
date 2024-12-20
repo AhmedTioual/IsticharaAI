@@ -10,8 +10,8 @@
     <div class="container">
         <!-- Left Nav Bar -->
         <nav class="sidebar">
-            <!-- Project Logo
-            <div class="logo">
+            <!-- Project Logo -->
+            <!-- <div class="logo">
                 <img src="assets/logo.png" alt="Project Logo">
             </div> -->
             <!-- Navigation Icons -->
@@ -26,7 +26,21 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <div id="messages" class="chat-window"></div>
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="user-info">
+                    <span class="user-name">AHMED TIOUAL</span>
+                    <img src="assets/user-image.png" alt="User Image" class="user-image">
+                </div>
+            </div>
+
+            <!-- Chat Window -->
+            <div id="messages" class="chat-window">
+                <div id="welcome-message" class="welcome-message">
+                    مرحباً 👋 ! كيف يمكنني مساعدتك اليوم؟
+                </div>
+            </div>
+            <!-- Chat Input -->
             <div class="chat-input">
                 <input type="text" id="user-input" placeholder="Type your question...">
                 <button id="send-button">➤</button>
