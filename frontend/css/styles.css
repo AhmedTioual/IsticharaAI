@@ -1,0 +1,175 @@
+/* General Reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    height: 100%;                /* Ensure body takes up full height */
+    width: 100%;                 /* Ensure body takes up full width */
+    overflow: hidden;            /* Prevent body overflow (scrollbar) */
+}
+
+/* Main Container */
+.container {
+    display: flex;
+    justify-content: center;    /* Center horizontally */
+    align-items: center;        /* Center vertically */
+    height: 100%;               /* Full height */
+    width: 100%;                /* Full width */
+    padding: 0;                 /* Remove padding */
+    margin: 0;                  /* Remove margin */
+}
+
+/* Sidebar Styles */
+.sidebar {
+    background-color: #003366;
+    color: white;
+    width: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center items vertically */
+    align-items: center;     /* Center items horizontally */
+    padding: 20px 0;
+    margin: 0;               /* Remove margin */
+    height: 100vh;           /* Full height of the viewport */
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+/* Navigation Icons */
+.nav-icons {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Ensure icons are centered vertically */
+    flex: 1;                 /* Allow icons to take remaining space */
+}
+
+.nav-icons li {
+    margin: 15px 0;
+}
+
+.nav-icons img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.nav-icons img:hover {
+    transform: scale(1.1);
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0px 50px;
+    width: 600px;               /* Limit width of the main content */
+    height: 80%;                /* Limit height of the main content */
+    border-radius: 8px;        /* Rounded corners */
+}
+
+
+/* Chat Window */
+.chat-window {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Message Styles */
+.user-message {
+    border-radius: 15px 0px 15px 15px;
+    /*border: 0.5px solid;*/
+}
+
+.bot-message, .error-message {
+    border-radius: 0px 15px 15px 15px;
+}
+
+.user-message, .bot-message, .error-message {
+    padding: 15px;
+    margin-bottom: 10px;
+    max-width: 80%;   /* Limit the width of messages */
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.user-message {
+    background-color: #003366;   /* Gray background for user messages */
+    align-self: flex-end;         /* Align user messages to the right */
+    text-align: right;   
+    color:white;         /* Align text to the right */
+}
+
+.bot-message {
+    background-color: #f1f1f1;   /* Light gray background for bot messages */
+    align-self: flex-start;       /* Align bot messages to the left */
+    text-align: left;             /* Align text to the left */
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.error-message {
+    background-color: #ffcccc;   /* Light red background for errors */
+    color: red;
+    text-align: center;
+}
+
+/* Chat Input */
+.chat-input {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #BDC3C7;
+    border-radius: 5px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.chat-input button {
+    padding: 10px 20px;
+    background-color: #003366;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.chat-input button:hover {
+    background-color: #020024;
+}
+
+/* Style for input field when focused */
+.chat-input input:focus {
+    outline: none;               /* Remove default outline */
+    border: 2px solid #003366;   /* Add custom border color */
+    background-color: #f0f8ff;   /* Change background color when focused */
+    box-shadow: 0 0 5px rgba(0, 51, 102, 0.5); /* Optional: add a subtle glow effect */
+}
+
+/* Navigation Icons */
+.nav-icons {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
