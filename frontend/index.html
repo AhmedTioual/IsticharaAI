@@ -5,35 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juridical Chatbot</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
     <div class="container">
         <!-- Left Nav Bar -->
         <nav class="sidebar">
-            <!-- Project Logo -->
-            <!-- <div class="logo">
-                <img src="assets/logo.png" alt="Project Logo">
-            </div> -->
             <!-- Navigation Icons -->
             <ul class="nav-icons">
-                <li><img src="assets/chat-icon.png" alt="Chat"></li>
-                <li><img src="assets/voice-chat-icon.png" alt="Voice Chat"></li>
+                <li><img src="assets/chat-icon.png" alt="Chat" onclick="showChat()"></li>
+                <li><img src="assets/voice-chat-icon.png" alt="Voice Chat" onclick="showVoiceChat()"></li>
                 <li><img src="assets/history-icon.png" alt="History"></li>
                 <li><img src="assets/data-source-icon.png" alt="Data Source"></li>
                 <li><img src="assets/about-icon.png" alt="About Us"></li>
             </ul>
         </nav>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Top Bar -->
-            <div class="top-bar">
-                <div class="user-info">
-                    <span class="user-name">AHMED TIOUAL</span>
-                    <img src="assets/user-image.png" alt="User Image" class="user-image">
-                </div>
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="user-info">
+                <span class="user-name">AHMED TIOUAL</span>
+                <img src="assets/user-image.png" alt="User Image" class="user-image">
             </div>
+        </div>
 
+        <!-- Main Content -->
+        <main class="main-content" id="main-content">
+            
             <!-- Chat Window -->
             <div id="messages" class="chat-window">
                 <div id="welcome-message" class="welcome-message">
@@ -46,6 +44,17 @@
                 <button id="send-button">➤</button>
             </div>
         </main>
+
+        <!-- Voice Chat Content -->
+        <div id="voice-chat-content" class="voice-chat-content" style="display: none;">
+            <div class="voice-chat-container">
+                <h2>Voice Chat is Active</h2>                
+                <!-- Circular Button for Recording -->
+                <button id="record-btn" class="record-btn" onclick="toggleRecording()">
+                    🎙️
+                </button>
+            </div>
+        </div>
     
     </div>
     <script src="js/script.js"></script>
