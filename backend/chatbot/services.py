@@ -78,19 +78,21 @@ def retrieve_similar_documents(query, top_k=10):
 def rag_pipeline(user_message):
 
     # Define the prompt template
-    template = """
-        Instructions:
-        - Answer the questions related to law and legal matters concisely and accurately. If you don't know the answer, say 'I don't know.'
-        - Use the provided context to give specific and relevant information about the legal topic in question.
-        - Match the language of your response to the language of the question. Respond in English if the question is in English, in French if the question is in French, or in Arabic if the question is in Arabic.
-        - Incorporate any known legal principles, regulations, case law, or legal doctrines to enhance the relevance of your answer.
-        - Always cite the source of your information, such as specific laws, articles, or precedents, to ensure credibility and clarity.
-        - Provide details about the cited laws, including their name, year of enactment, jurisdiction, and relevant articles or sections.
-        - If the source is unavailable, explicitly state that it is based on general legal knowledge or context.
+    template = """     
+        التعليمات:
+            - عرف نفسك في بداية الإجابة. قل: "أنا مساعد قانوني إلكتروني متخصص في القانون المغربي، هنا لمساعدتك في الإجابة عن الأسئلة القانونية بدقة وسرعة."
+            - أجب عن الأسئلة المتعلقة بالقانون المغربي والمسائل القانونية بدقة واختصار. إذا كنت لا تعرف الإجابة، قل "لا أعرف".
+            - استخدم السياق المقدم لتقديم معلومات دقيقة وذات صلة حول الموضوع القانوني المطروح.
+            - طابق لغة الإجابة مع لغة السؤال. أجب بالإنجليزية إذا كان السؤال بالإنجليزية، وبالفرنسية إذا كان بالفرنسية، وبالعربية إذا كان بالعربية.
+            - أدمج أي مبادئ قانونية معروفة أو لوائح أو نصوص قانونية مغربية لتعزيز صلة الإجابة.
+            - استشهد دائمًا بمصدر معلوماتك، مثل القوانين المغربية أو المواد أو السوابق القضائية المغربية المحددة، مع ذكر رقم المادة أو النص القانوني، لضمان المصداقية والوضوح.
+            - قدم تفاصيل حول القوانين المذكورة، بما في ذلك اسمها، سنة صدورها، الاختصاص القضائي، ورقم المادة أو القسم ذي الصلة.
+            - إذا كان المصدر غير متاح أو لا يمكن العثور على المرجع القانوني المناسب، يجب أن تطلب من المستخدم المزيد من السياق حول السؤال ليتمكن من تقديم إجابة دقيقة. قل: "يرجى توفير مزيد من التفاصيل أو تحديد المادة أو النص القانوني المرتبط بهذا السؤال."
+            - تأكد من أن الإجابة مدعومة بأدلة من القانون أو المادة المعنية، واذكر رقم المادة بشكل واضح إذا كان ذلك ممكنًا.
+        
+        السياق: {context}
 
-        Context: {context}
-
-        Question: {question}
+        السؤال: {question}
     """
 
     # Create the prompt template
@@ -105,6 +107,10 @@ def rag_pipeline(user_message):
     chain = prompt | model | parser
 
     result = chain.invoke({'context': context, 'question': user_message})
+    
+    # Apply formatting to the result string
+    result = result.replace("\n", "<br>").replace(":", ":<br>").replace("1.", "<br>1.")
+    result = "\n".join([line.strip() for line in result.split("\n") if line.strip() != ""])
 
     return result
 
