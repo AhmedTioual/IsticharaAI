@@ -1,0 +1,2 @@
+python backend/manage.py runserver
+python -m http.server 8000

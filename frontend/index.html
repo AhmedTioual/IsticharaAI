@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juridical Chatbot</title>
+    <link rel="icon" href="assets/law.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Left Nav Bar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="assets/logo.png" alt="Project Logo">
+            </div>
+            <ul class="nav-icons">
+                <li data-section="home" class="nav-item" id="home">
+                    <a href="#" data-section="home"><img src="assets/chat-icon.png" alt="Chat Icon" class="nav-img"></a>
+                </li>
+                <li data-section="voice-chat" class="nav-item" id="voice-chat">
+                    <a href="#" data-section="voice-chat"><img src="assets/voice-chat-icon.png" alt="Voice Chat Icon" class="nav-img"></a>
+                </li>
+                <li data-section="history" class="nav-item" id="history">
+                    <a href="#" data-section="history"><img src="assets/history-icon.png" alt="History Icon" class="nav-img"></a>
+                </li>
+                <li data-section="data-source" class="nav-item" id="data-source">
+                    <a href="#" data-section="data-source"><img src="assets/data-source-icon.png" alt="Data Source Icon" class="nav-img"></a>
+                </li>
+                <li data-section="about" class="nav-item" id="about">
+                    <a href="#" data-section="about"><img src="assets/about-icon.png" alt="About Icon" class="nav-img"></a>
+                </li>
+            </ul>
+        </nav> 
+
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="user-info">
+                <span class="user-name">USER</span>
+                <img src="assets/user-image.png" alt="User Image" class="user-image">
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content" id="main-content">
+            
+            <!-- Chat Window -->
+            <div id="messages" class="chat-window">
+                <div id="welcome-message" class="welcome-message">
+                    سلام 👋 ! كيفاش بغيتي نعاونك ليوم؟
+                </div>
+            </div>
+            <!-- Chat Input -->
+            <div class="chat-input">
+                <input type="text" id="user-input" placeholder="Type your question...">
+                <button id="send-button">➤</button>
+            </div>
+            <div class="chat-info-container">
+                <p class="chat-info">Chat can make mistakes. Check important info.</p>
+            </div>
+        </main>
+
+        <!-- Voice Chat Content -->
+        <div id="voice-chat-content" class="voice-chat-content">
+            <div class="voice-chat-container">
+                <h2>Voice Chat is Active</h2>                
+                <!-- Circular Button for Recording -->
+                <button id="record-btn" class="record-btn" onclick="toggleRecording()">
+                    🎙️
+                </button>
+            </div>
+        </div>
+
+        <!-- History Section -->
+        <div id="history-content" class="history-content">
+            <div id="history" class="content-section">
+                <h2>History Section</h2>
+                <p>View your past interactions and conversations here.</p>
+            </div>
+        </div>
+
+
+        <!-- Data Source Section -->
+        <div id="data-source-content" class="content-section"  >
+            <!-- Title Section -->
+            <h1>المواد</h1>
+
+            <!-- Grid Section -->
+            <div class="grid-themes" id="grid-themes-centent">
+                <!-- Items will be dynamically generated -->
+            </div>
+        </div>
+
+
+        <!-- Details Section -->
+        <div id="details-content" class="content-section"  >
+            <h4 id="details-item-heading"></h4>
+            <div id="details-item-title">
+            </div>
+            <button onclick="goBack()" id="details-back-button">
+                <img src="assets/left-arrow-w.png" alt="Back Arrow" id="back-icon"> رجوع
+            </button>
+        </div>
+        
+        <!-- About Us Section -->
+        <div id="about-content" class="content-section">
+            <h2 class="about-title">About Us</h2>
+            <div class="grid-about">
+                <!-- Person 1 -->
+                <div class="card-about">
+                    <img src="assets/oualid.png" alt="Person 1" id="im1" class="person-image">
+                    <h3 class="person-name">OUALID AIT AISSA</h3>
+                    <p class="person-title">Master in Data Science</p>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/oualid-ait-aissa-914643239/" target="_blank">
+                            <img src="assets/linkedin-icon.png" alt="LinkedIn" class="social-icon">
+                        </a>
+                        <a href="https://github.com/MOULAY-Oualid" target="_blank">
+                            <img src="assets/github-icon.png" alt="GitHub" class="social-icon">
+                        </a>
+                    </div>
+                </div>
+
+                
+                <!-- Person 2 -->
+                <div class="card-about">
+                    <img src="assets/ahmed.png" alt="Person 2" id="im2" class="person-image">
+                    <h3 class="person-name">AHMED TIOUAL</h3>
+                    <p class="person-title">Master in Data Science</p>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/ahmed-tioual/" target="_blank">
+                            <img src="/assets/linkedin-icon.png" alt="LinkedIn" class="social-icon">
+                        </a>
+                        <a href="https://github.com/AhmedTioual" target="_blank">
+                            <img src="/assets/github-icon.png" alt="GitHub" class="social-icon">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Person 3 -->
+                <div class="card-about">
+                    <img src="assets/youssef.png" alt="Person 3" id="im3" class="person-image">
+                    <h3 class="person-name">YOUSSEF HIDSI</h3>
+                    <p class="person-title">Master in Data Science</p>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/youssef-hidsi-372106251/" target="_blank">
+                            <img src="/assets/linkedin-icon.png" alt="LinkedIn" class="social-icon">
+                        </a>
+                        <a href="#" target="_blank">
+                            <img src="/assets/github-icon.png" alt="GitHub" class="social-icon">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Person 4 -->
+                <div class="card-about">
+                    <img src="assets/moad.png" alt="Person 4" id="im4" class="person-image">
+                    <h3 class="person-name">MOADE ARSALANE</h3>
+                    <p class="person-title">Master in Data Science</p>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/arsalane-moad-2b596323a/" target="_blank">
+                            <img src="/assets/linkedin-icon.png" alt="LinkedIn" class="social-icon">
+                        </a>
+                        <a href="#" target="_blank">
+                            <img src="/assets/github-icon.png" alt="GitHub" class="social-icon">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="js/script.js"></script>
+    <script src="js/sections.js"></script>
+    <script src="js/themes.js"></script>
+    <script src="js/history.js"></script>
+</body>
+</html>
