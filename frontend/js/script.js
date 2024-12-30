@@ -11,6 +11,36 @@ document.getElementById('user-input').addEventListener('keydown', async (event) 
     }
 });
 
+// Wait for the DOM to load completely before adding event listeners
+document.addEventListener('DOMContentLoaded', function () {
+    // Get all the navigation list items
+    let items = document.querySelectorAll('.nav-icons li');
+
+    // Set event listener for each list item to change the active state
+    items.forEach(item => {
+        item.addEventListener('click', function () {
+            // Remove 'active' class from all list items
+            items.forEach(i => i.classList.remove('active'));
+
+            // Add 'active' class to the clicked item
+            item.classList.add('active');
+
+            // Call the relevant function based on the clicked item
+            if (item.textContent.trim() === "Chat") {
+                showChat();
+            } else if (item.textContent.trim() === "Voice Chat") {
+                showVoiceChat();
+            } else if (item.textContent.trim() === "History") {
+                showHistory();
+            } else if (item.textContent.trim() === "Data Source") {
+                showDataSource();
+            } else if (item.textContent.trim() === "About Us") {
+                showAboutUs();
+            }
+        });
+    });
+});
+
 // Function to send the message
 async function sendMessage() {
     const userInput = document.getElementById('user-input').value;
@@ -82,17 +112,54 @@ async function sendMessage() {
     messages.scrollTop = messages.scrollHeight;
 }
 
-
 function showVoiceChat() {
     // Hide main content and show voice chat content
     document.getElementById('main-content').style.display = 'none';
     document.getElementById('voice-chat-content').style.display = 'flex';
+    document.getElementById('data-source-content').style.display = 'none';
+    document.getElementById('about-us-content').style.display = 'none';
+    document.getElementById('history-content').style.display = 'none';
+    document.getElementById('details-content').style.display = 'none';
 }
 
 function showChat() {
     // Hide voice chat content and show main content
-    document.getElementById('voice-chat-content').style.display = 'none';
     document.getElementById('main-content').style.display = 'flex';
+    document.getElementById('voice-chat-content').style.display = 'none';
+    document.getElementById('data-source-content').style.display = 'none';
+    document.getElementById('about-us-content').style.display = 'none';
+    document.getElementById('history-content').style.display = 'none';
+    document.getElementById('details-content').style.display = 'none';
+}
+
+function showHistory() {
+    // Hide voice chat content and show main content
+    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('voice-chat-content').style.display = 'none';
+    document.getElementById('data-source-content').style.display = 'none';
+    document.getElementById('about-us-content').style.display = 'none';
+    document.getElementById('history-content').style.display = 'flex';
+    document.getElementById('details-content').style.display = 'none';
+}
+
+function showDataSource() {
+    // Hide voice chat content and show main content
+    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('voice-chat-content').style.display = 'none';
+    document.getElementById('data-source-content').style.display = 'flex';
+    document.getElementById('about-us-content').style.display = 'none';
+    document.getElementById('history-content').style.display = 'none';
+    document.getElementById('details-content').style.display = 'none';
+}
+
+function showAboutUs() {
+    // Hide voice chat content and show main content
+    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('voice-chat-content').style.display = 'none';
+    document.getElementById('data-source-content').style.display = 'none';
+    document.getElementById('about-us-content').style.display = 'flex';
+    document.getElementById('history-content').style.display = 'none';
+    document.getElementById('details-content').style.display = 'none';
 }
 
 let isRecording = false;

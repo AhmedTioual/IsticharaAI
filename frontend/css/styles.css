@@ -51,18 +51,32 @@ body, html {
 }
 
 .nav-icons li {
-    margin: 15px 0;
+    width: 50px; /* Fixed width */
+    height: 50px; /* Fixed height */
+    margin: 7px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px; /* Ensures consistent appearance */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
 }
 
 .nav-icons img {
-    width: 25px;
-    height: 25px;
+    width: 25px; /* Fixed width for images */
+    height: 25px; /* Fixed height for images */
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: filter 0.3s ease; /* Smooth transition for color effects */
 }
 
-.nav-icons img:hover {
-    transform: scale(1.1);
+/* Active state when an item is clicked */
+.nav-icons li.active {
+    background-color: rgb(255, 255, 255); /* Background color for active item */
+    /* No need to redefine width and height, already set above */
+}
+
+/* Apply active state style to images */
+.nav-icons li.active img {
+    filter: brightness(0) saturate(100%) invert(23%) sepia(30%) saturate(500%) hue-rotate(180deg); /* Blue effect */
 }
 
 /* Main Content */
@@ -71,7 +85,7 @@ body, html {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 0px 10%;
+    padding: 0px 15%;
     width: 600px;               /* Limit width of the main content */
     height: 80%;                /* Limit height of the main content */
     border-radius: 8px;        /* Rounded corners */
@@ -153,13 +167,13 @@ body, html {
 }
 
 .chat-input button:hover {
-    background-color: #020024;
+    background-color: #004386;
 }
 
 /* Style for input field when focused */
 .chat-input input:focus {
     outline: none;               /* Remove default outline */
-    border: 2px solid #003366;   /* Add custom border color */
+    border: 2px solid #c3e1ff;   /* Add custom border color */
     background-color: #f0f8ff;   /* Change background color when focused */
     box-shadow: 0 0 5px rgba(0, 51, 102, 0.5); /* Optional: add a subtle glow effect */
 }
@@ -212,6 +226,8 @@ body, html {
     object-fit: cover; /* Ensure the image scales properly */
     border: 2px solid #003366; /* Optional border */
 }
+
+/*------------------------- Main Content Section -----------------------------*/
 
 /* Adjust main content */
 .main-content {
@@ -293,4 +309,287 @@ body, html {
         transform: scale(2);
         opacity: 0;
     }
+}
+
+
+/*------------------------- History Section -----------------------------*/
+
+.history-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0px 50px;
+    width: 600px;               /* Same width as main content */
+    height: 80%;                /* Same height as main content */
+}
+
+.history-content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+/*------------------------- Data Source Section -----------------------------*/
+
+.data-source-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0px 50px;
+    width: 600px;               /* Same width as main content */
+    height: 80%;                /* Same height as main content */
+    text-align: center;
+    overflow-y: auto;          /* Enable vertical scrolling when content exceeds height */
+}
+
+.data-source-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 cards per row on large screens */
+    gap: 25px; /* Space between cards */
+    padding: 20px;
+    justify-items: center; /* Center align cards in the grid */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.card-theme {
+    width: 250px; /* Fixed width */
+    height: auto; /* Fixed height */
+    background-color: #f9f9f9;
+    border: 2px solid transparent; /* Initial border */
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    animation: fadeIn 0.5s ease; /* Animation effect on load */
+    overflow: hidden; /* Ensure text does not overflow the card */
+}
+
+.card-theme:hover {
+    transform: translateY(-10px); /* Lift on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    border-color: #00509e; /* Highlight border on hover */
+}
+
+.card-theme img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+}
+
+.card-theme-title {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #003366;
+    margin-bottom: 10px;
+    flex-grow: 1; /* Allow text to grow within the space */
+    text-overflow: ellipsis;
+    overflow: hidden; /* Prevent text overflow */
+}
+
+.theme-button {
+    margin-top: auto;
+    padding: 10px 20px;
+    background-color: #003366;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.theme-button:hover {
+    background-color: #00509e;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 1200px) {
+    .data-source-container {
+        grid-template-columns: repeat(3, 1fr); /* 3 cards per row for medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .data-source-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 cards per row for small screens */
+        gap: 20px; /* Adjust spacing for smaller screens */
+    }
+
+    .card-themes {
+        width: 200px; /* Adjust card width for small screens */
+        height: 300px; /* Adjust card height for small screens */
+    }
+
+    .theme-button {
+        font-size: 12px;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .data-source-container {
+        grid-template-columns: 1fr; /* 1 card per row on very small screens */
+    }
+
+    .card-themes {
+        width: 100%; /* Full width for small screens */
+        height: 300px; /* Adjust card height for very small screens */
+    }
+}
+
+
+/* ------------------------------- Details Section -------------------------------*/
+
+.content-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0px 50px;
+    width: 600px;               /* Same width as main content */
+    height: 80%;                /* Same height as main content */
+    text-align: center;
+    overflow-y: auto;          /* Enable vertical scrolling when content exceeds height */
+}
+
+/* Details Card Styling */
+.details-card {
+    display: flex;
+    justify-content: space-between; /* Ensures the content and rectangle are on opposite sides */
+    align-items: center;
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 77%;
+    height: 119px;
+}
+
+
+.details-card:hover {
+    background-color: #e0e0e0;
+}
+
+/* Card content inside Details Section */
+.card-details-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.card-details-text h3 {
+    font-size: 18px;
+    color: #333;
+}
+
+/* Rectangle for categories like "مرسوم", "ظهير" */
+.rectangle {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Back Button Styling */
+#details-back-button {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    color: #003366;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    transition: color 0.3s;
+}
+
+#details-back-button:hover {
+    color: #416483;
+}
+
+#back-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+/* Scrollbar Styling */
+.content-section::-webkit-scrollbar {
+    width: 8px; /* Set width of scrollbar */
+}
+
+.content-section::-webkit-scrollbar-thumb {
+    background-color: #003366; /* Dark color for the thumb */
+    border-radius: 10px;
+}
+
+.content-section::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Light background for the scrollbar track */
+}
+
+/* Ensuring content doesn't overlap and is scrollable */
+.details-card:last-child {
+    margin-bottom: 0;
+}
+
+/* Mobile and smaller screen adjustments */
+@media (max-width: 768px) {
+    .content-section {
+        padding: 20px;
+        width: 90%; /* Adjust width for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .content-section {
+        width: 100%; /* Full width on very small screens */
+        padding: 15px;
+    }
+}
+
+
+/*------------------------- About Us Section -----------------------------*/
+
+.about-us-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0px 50px;
+    width: 600px;               /* Same width as main content */
+    height: 80%;                /* Same height as main content */
+}
+
+.about-us-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }

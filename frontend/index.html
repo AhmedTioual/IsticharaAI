@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juridical Chatbot</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/law.png" type="image/x-icon">
 </head>
 <body>
     <div class="container">
@@ -13,14 +13,14 @@
         <nav class="sidebar">
             <!-- Navigation Icons -->
             <ul class="nav-icons">
-                <li><img src="assets/chat-icon.png" alt="Chat" onclick="showChat()"></li>
-                <li><img src="assets/voice-chat-icon.png" alt="Voice Chat" onclick="showVoiceChat()"></li>
-                <li><img src="assets/history-icon.png" alt="History"></li>
-                <li><img src="assets/data-source-icon.png" alt="Data Source"></li>
-                <li><img src="assets/about-icon.png" alt="About Us"></li>
+                <li class="active" onclick="showChat()"><img src="assets/chat-icon.png" alt="Chat"></li>
+                <li onclick="showVoiceChat()"><img src="assets/voice-chat-icon.png" alt="Voice Chat"></li>
+                <li onclick="showHistory()"><img src="assets/history-icon.png" alt="History"></li>
+                <li onclick="showDataSource()"><img src="assets/data-source-icon.png" alt="Data Source"></li>
+                <li onclick="showAboutUs()"><img src="assets/about-icon.png" alt="About Us"></li>
             </ul>
         </nav>
-
+            
         <!-- Top Bar -->
         <div class="top-bar">
             <div class="user-info">
@@ -48,15 +48,45 @@
         <!-- Voice Chat Content -->
         <div id="voice-chat-content" class="voice-chat-content" style="display: none;">
             <div class="voice-chat-container">
-                <h2>Voice Chat is Active</h2>                
+                <h2 style="color:#003366 ;">محتاج شي حاجة هضر معايا</h2>                
                 <!-- Circular Button for Recording -->
                 <button id="record-btn" class="record-btn" onclick="toggleRecording()">
                     🎙️
                 </button>
             </div>
         </div>
-    
+        
+        <div id="history-content" class="history-content" style="display: none;">
+            <div class="history-content-container">
+                <h2 style="color:#003366 ;">... قريبا</h2>                
+            </div>
+        </div>
+
+        <!-- Data Source Content Section -->
+        <div id="data-source-content" class="data-source-content" style="display: none;">
+            <h2 style="color:#003366 ;">مصادر البيانات</h2>  
+            <!-- Grid for displaying themes as cards -->
+            <div class="data-source-container" id="gridThemesContent">
+                <!-- Cards will be dynamically added here -->
+            </div>
+        </div>
+
+        <!-- Details Section (hidden initially) -->
+        <div id="details-content" class="content-section" style="display: none;">
+            <h2 id="details-item-heading"style="color:#003366 ;"></h2>
+            <div id="details-item-title"></div>
+            <button onclick="goBack()" id="details-back-button">
+                <img src="assets/left-arrow-w.png" alt="Back Arrow" id="back-icon"> رجوع
+            </button>
+        </div>
+
+        <div id="about-us-content" class="about-us-content" style="display: none;">
+            <div class="about-us-container">
+                <h2>About US</h2>                
+            </div>
+        </div>
     </div>
     <script src="js/script.js"></script>
+    <script src="js/themes.js"></script>
 </body>
 </html>
