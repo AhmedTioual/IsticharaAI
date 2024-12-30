@@ -67,6 +67,7 @@ body, html {
     border-radius: 5px; /* Rounded corners for the background box */
     transition: background-color 0.3s ease; /* Smooth transition */
     cursor: pointer;
+    height: 25px;
 }
 
 .nav-icons img {
@@ -81,6 +82,7 @@ body, html {
 .nav-icons li:hover, .nav-icons li.clicked {
     background-color: white; /* Background color on hover or click */
     cursor: pointer;
+    height: 25px;
 }
 
 
