@@ -6,14 +6,14 @@
       "use": "@vercel/static"
     },
     {
-      "src": "backend/vercel_wsgi.py",
+      "src": "backend/manage.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "backend/vercel_wsgi.py"
+      "dest": "backend/manage.py"
     },
     {
       "src": "/(.*)",
