@@ -1,4 +1,84 @@
-// Add event listener for the 
+// Wait for the DOM to load completely before adding event listeners
+document.addEventListener('DOMContentLoaded', function () {
+    // Get all the navigation list items
+    let items = document.querySelectorAll('.nav-icons li');
+
+    // Set event listener for each list item to change the active state
+    items.forEach(item => {
+        item.addEventListener('click', function () {
+            // Remove 'active' class from all list items
+            items.forEach(i => i.classList.remove('active'));
+
+            // Add 'active' class to the clicked item
+            item.classList.add('active');
+
+            // Call the relevant function based on the clicked item
+            if (item.textContent.trim() === "Chat") {
+                showChat();
+            } else if (item.textContent.trim() === "Voice Chat") {
+                showVoiceChat();
+            } else if (item.textContent.trim() === "History") {
+                showHistory();
+            } else if (item.textContent.trim() === "Data Source") {
+                showDataSource();
+            } else if (item.textContent.trim() === "About Us") {
+                showAboutUs();
+            }
+        });
+    });
+});
+
+function showVoiceChat() {
+    // Hide main content and show voice chat content
+    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('voice-chat-content').style.display = 'flex';
+    document.getElementById('data-source-content').style.display = 'none';
+    document.getElementById('about-us-content').style.display = 'none';
+    document.getElementById('history-content').style.display = 'none';
+    document.getElementById('details-content').style.display = 'none';
+}
+
+function showChat() {
+    // Hide voice chat content and show main content
+    document.getElementById('main-content').style.display = 'flex';
+    document.getElementById('voice-chat-content').style.display = 'none';
+    document.getElementById('data-source-content').style.display = 'none';
+    document.getElementById('about-us-content').style.display = 'none';
+    document.getElementById('history-content').style.display = 'none';
+    document.getElementById('details-content').style.display = 'none';
+}
+
+function showHistory() {
+    // Hide voice chat content and show main content
+    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('voice-chat-content').style.display = 'none';
+    document.getElementById('data-source-content').style.display = 'none';
+    document.getElementById('about-us-content').style.display = 'none';
+    document.getElementById('history-content').style.display = 'flex';
+    document.getElementById('details-content').style.display = 'none';
+}
+
+function showDataSource() {
+    // Hide voice chat content and show main content
+    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('voice-chat-content').style.display = 'none';
+    document.getElementById('data-source-content').style.display = 'flex';
+    document.getElementById('about-us-content').style.display = 'none';
+    document.getElementById('history-content').style.display = 'none';
+    document.getElementById('details-content').style.display = 'none';
+}
+
+function showAboutUs() {
+    // Hide voice chat content and show main content
+    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('voice-chat-content').style.display = 'none';
+    document.getElementById('data-source-content').style.display = 'none';
+    document.getElementById('about-us-content').style.display = 'flex';
+    document.getElementById('history-content').style.display = 'none';
+    document.getElementById('details-content').style.display = 'none';
+}
+
+// Add event listener for the send button
 document.getElementById('send-button').addEventListener('click', async () => {
     sendMessage();
 });
@@ -33,6 +113,15 @@ async function sendMessage() {
     // Clear input field
     document.getElementById('user-input').value = '';
 
+    // Step 1: Show loading message immediately
+    const loadingMessage = document.createElement('div');
+    loadingMessage.classList.add('loading-message');
+    loadingMessage.textContent = '🤌🏻 ... بلاتي';
+    messages.appendChild(loadingMessage);
+
+    // Scroll to the bottom of the chat to show new messages
+    messages.scrollTop = messages.scrollHeight;
+
     // Call the backend API
     try {
         const response = await fetch('http://127.0.0.1:8000/api/chat/', {
@@ -56,10 +145,7 @@ async function sendMessage() {
             botMessage.innerHTML = cleanedResponse;
         
             botMessage.classList.add('bot-message');
-            
-            botMessage.setAttribute('dir', 'rtl'); 
-            
-            // Apply right-to-left text direction for Arabic
+            botMessage.setAttribute('dir', 'rtl'); // Arabic direction
             botMessage.style.direction = 'rtl';  // Ensures right-to-left display
             botMessage.style.textAlign = 'right';  // Aligns text to the right
         } else {
@@ -67,8 +153,8 @@ async function sendMessage() {
             botMessage.classList.add('error-message');
         }
 
-        messages.appendChild(botMessage);
-
+        // Step 2: Remove the loading message and append bot's response
+        messages.removeChild(loadingMessage);
         messages.appendChild(botMessage);
 
     } catch (error) {
@@ -76,24 +162,15 @@ async function sendMessage() {
         errorMessage.textContent = 'Error: Unable to connect to the chatbot API.';
         errorMessage.classList.add('error-message');
         messages.appendChild(errorMessage);
+
+        // Remove the loading message in case of an error
+        messages.removeChild(loadingMessage);
     }
 
     // Scroll to the bottom of the chat
     messages.scrollTop = messages.scrollHeight;
 }
 
-
-function showVoiceChat() {
-    // Hide main content and show voice chat content
-    document.getElementById('main-content').style.display = 'none';
-    document.getElementById('voice-chat-content').style.display = 'flex';
-}
-
-function showChat() {
-    // Hide voice chat content and show main content
-    document.getElementById('voice-chat-content').style.display = 'none';
-    document.getElementById('main-content').style.display = 'flex';
-}
 
 let isRecording = false;
 let mediaRecorder;
