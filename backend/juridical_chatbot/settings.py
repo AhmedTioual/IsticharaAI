@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'backend.chatbot',  # Ensure this is listed correctly
+    'chatbot',  # Ensure this is listed correctly
     'corsheaders',
 ]
 
