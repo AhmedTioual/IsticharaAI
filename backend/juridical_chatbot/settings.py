@@ -36,8 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'chatbot',
-    'corsheaders',  # For CORS support
+    'backend.chatbot',  # Ensure this is listed correctly
+    'corsheaders',
 ]
 
 # Middleware for CORS and other security features
