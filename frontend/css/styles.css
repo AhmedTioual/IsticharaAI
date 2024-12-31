@@ -29,13 +29,24 @@ body, html {
     width: 70px;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center items vertically */
+    justify-content: flex-start; /* Adjust to start from the top */
     align-items: center;     /* Center items horizontally */
     padding: 20px 0;
     margin: 0;               /* Remove margin */
     height: 100vh;           /* Full height of the viewport */
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+/* Logo Container */
+.logo-container {
+    margin-bottom: 20px; /* Space between the logo and nav items */
+}
+
+/* Logo Image */
+.logo {
+    width: 40px; /* Adjust the size of the logo */
+    height: auto;
 }
 
 /* Navigation Icons */
@@ -51,18 +62,32 @@ body, html {
 }
 
 .nav-icons li {
-    margin: 15px 0;
+    width: 50px; /* Fixed width */
+    height: 50px; /* Fixed height */
+    margin: 7px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px; /* Ensures consistent appearance */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
 }
 
 .nav-icons img {
-    width: 25px;
-    height: 25px;
+    width: 25px; /* Fixed width for images */
+    height: 25px; /* Fixed height for images */
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: filter 0.3s ease; /* Smooth transition for color effects */
 }
 
-.nav-icons img:hover {
-    transform: scale(1.1);
+/* Active state when an item is clicked */
+.nav-icons li.active {
+    background-color: rgb(255, 255, 255); /* Background color for active item */
+    /* No need to redefine width and height, already set above */
+}
+
+/* Apply active state style to images */
+.nav-icons li.active img {
+    filter: brightness(0) saturate(100%) invert(23%) sepia(30%) saturate(500%) hue-rotate(180deg); /* Blue effect */
 }
 
 /* Main Content */
@@ -71,7 +96,7 @@ body, html {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 0px 10%;
+    padding: 0px 15%;
     width: 600px;               /* Limit width of the main content */
     height: 80%;                /* Limit height of the main content */
     border-radius: 8px;        /* Rounded corners */
@@ -153,15 +178,64 @@ body, html {
 }
 
 .chat-input button:hover {
-    background-color: #020024;
+    background-color: #004386;
 }
 
 /* Style for input field when focused */
 .chat-input input:focus {
     outline: none;               /* Remove default outline */
-    border: 2px solid #003366;   /* Add custom border color */
+    border: 2px solid #c3e1ff;   /* Add custom border color */
     background-color: #f0f8ff;   /* Change background color when focused */
     box-shadow: 0 0 5px rgba(0, 51, 102, 0.5); /* Optional: add a subtle glow effect */
+}
+
+/* Loading Message */
+.loading-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    max-width: 80%;
+    border-radius: 15px 0px 15px 15px;
+    align-self: flex-start;
+    position: relative;
+    animation: fade-in 1s ease-out;
+    font-weight: 300;
+}
+
+/* Animation for the fade-in effect */
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Slide in from the right for user messages */
+@keyframes slide-in-right {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Slide in from the left for bot messages */
+@keyframes slide-in-left {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 /* Navigation Icons */
@@ -212,6 +286,8 @@ body, html {
     object-fit: cover; /* Ensure the image scales properly */
     border: 2px solid #003366; /* Optional border */
 }
+
+/*------------------------- Main Content Section -----------------------------*/
 
 /* Adjust main content */
 .main-content {
@@ -292,5 +368,434 @@ body, html {
     100% {
         transform: scale(2);
         opacity: 0;
+    }
+}
+
+
+/*------------------------- History Section -----------------------------*/
+
+.history-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0px 50px;
+    width: 600px;               /* Same width as main content */
+    height: 80%;                /* Same height as main content */
+}
+
+.history-content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+/*------------------------- Data Source Section -----------------------------*/
+
+.data-source-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0px 50px;
+    width: 600px;               /* Same width as main content */
+    height: 80%;                /* Same height as main content */
+    text-align: center;
+    overflow-y: auto;          /* Enable vertical scrolling when content exceeds height */
+}
+
+.data-source-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 cards per row on large screens */
+    gap: 25px; /* Space between cards */
+    padding: 20px;
+    justify-items: center; /* Center align cards in the grid */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.card-theme {
+    width: 250px; /* Fixed width */
+    height: auto; /* Fixed height */
+    background-color: #f9f9f9;
+    border: 2px solid transparent; /* Initial border */
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    animation: fadeIn 0.5s ease; /* Animation effect on load */
+    overflow: hidden; /* Ensure text does not overflow the card */
+}
+
+.card-theme:hover {
+    transform: translateY(-10px); /* Lift on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    border-color: #00509e; /* Highlight border on hover */
+}
+
+.card-theme img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+}
+
+.card-theme-title {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #003366;
+    margin-bottom: 10px;
+    flex-grow: 1; /* Allow text to grow within the space */
+    text-overflow: ellipsis;
+    overflow: hidden; /* Prevent text overflow */
+}
+
+.theme-button {
+    margin-top: auto;
+    padding: 10px 20px;
+    background-color: #003366;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.theme-button:hover {
+    background-color: #00509e;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 1200px) {
+    .data-source-container {
+        grid-template-columns: repeat(3, 1fr); /* 3 cards per row for medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .data-source-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 cards per row for small screens */
+        gap: 20px; /* Adjust spacing for smaller screens */
+    }
+
+    .card-themes {
+        width: 200px; /* Adjust card width for small screens */
+        height: 300px; /* Adjust card height for small screens */
+    }
+
+    .theme-button {
+        font-size: 12px;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .data-source-container {
+        grid-template-columns: 1fr; /* 1 card per row on very small screens */
+    }
+
+    .card-themes {
+        width: 100%; /* Full width for small screens */
+        height: 300px; /* Adjust card height for very small screens */
+    }
+}
+
+
+/* ------------------------------- Details Section -------------------------------*/
+
+/* Content Section Styling */
+.details-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content at the top */
+    padding: 0px 10%;
+    width: 600px; /* Same width as main content */
+    height: 79%; /* Same height as main content */
+    text-align: center;
+    overflow-y: auto; /* Enable vertical scrolling when content exceeds height */
+}
+
+#details-item-heading {
+    position: sticky;
+    top: -3px; /* Adjust based on your layout */
+    background-color: #fff; /* Optional: background to prevent overlap */
+    z-index: 100; /* Ensure it appears above other elements */
+    padding: 10px 0; /* Optional: Add some padding for aesthetics */
+    color:#003366 ;
+}
+
+
+
+/* Details Card Styling */
+.details-card {
+    display: flow-root;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative; /* For positioning rectangle and button inside the card */
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: auto; /* Take full width inside its container */
+    margin-bottom: 19px; /* Space between cards */
+    height: auto; /* Auto height depending on content */
+}
+
+.details-card:hover {
+    background-color: #e0e0e0;
+}
+
+/* Card content inside Details Section */
+.card-details-content {
+    padding: 0px;
+}
+
+.card-details-text h3 {
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+    margin-block-start: auto;
+}
+
+
+
+/* Buttons inside the card */
+.details-card a {
+    display: inline-block;
+    position: relative;
+    bottom: 15px; /* Align to the bottom */
+    left: 15px; /* Align to the left side */
+    padding: 10px 20px;
+    background-color: #1c6fc2;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 5px;
+    margin-bottom: -13px;
+}
+
+.details-card a:hover {
+    background-color: #ffffff;
+    color: #1c6fc2;
+    border: 1px solid #1c6fc2;
+}
+
+/* Back Button Styling */
+#details-back-button {
+    position: absolute; /* Position relative to its parent container */
+    bottom: 10px; /* Distance from the bottom of the container */
+    left: 50%; /* Position the button at the center horizontally */
+    transform: translateX(-10%); /* Center the button accurately */
+    background-color: #003366;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    z-index: 100; /* Ensure it stays above other content */
+    width: fit-content;
+}
+
+
+#details-back-button img {
+    width: 20px; /* Adjust icon size */
+    height: 20px; /* Adjust icon size */
+    transition: content 0.3s ease;
+}
+
+
+#back-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+/* Scrollbar Styling */
+.content-section::-webkit-scrollbar {
+    width: 8px;
+}
+
+.content-section::-webkit-scrollbar-thumb {
+    background-color: #003366;
+    border-radius: 10px;
+}
+
+.content-section::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Ensuring content doesn't overlap and is scrollable */
+.details-card:last-child {
+    margin-bottom: 0;
+}
+
+/* Mobile and smaller screen adjustments */
+@media (max-width: 768px) {
+    .content-section {
+        padding: 20px;
+        width: 90%; /* Adjust width for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .content-section {
+        width: 100%; /* Full width on very small screens */
+        padding: 15px;
+    }
+}
+
+/*------------------------- About Us Section -----------------------------*/
+
+.about-us-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0px 50px;
+    width: 600px;               /* Same width as main content */
+    height: 80%;                /* Same height as main content */
+}
+
+.about-us-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.grid-about {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
+    gap: 20px;
+    max-width: 1200px; /* Set max width for the grid */
+    margin: 0 auto; /* Center the grid horizontally */
+    padding: 20px;
+    justify-content: center; /* Center items horizontally */
+    align-content: center; /* Center items vertically */
+    height: 100%; /* Adjust to parent height */
+    padding-top: 0px;
+}
+
+/* Card Style */
+.card-about {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 40px 20px; /* Add more padding for larger images */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 350px;
+}
+
+/* Hover Effect for Cards */
+.card-about:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Person Image Styling */
+.person-image {
+    width: 200px; /* Increase the width */
+    height: 200px; /* Increase the height */
+    border-radius: 50%; /* Keep the circular shape */
+    object-fit: cover; /* Ensure the image scales proportionally */
+    margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+    .person-image {
+        width: 150px; /* Adjust size for smaller screens */
+        height: 150px;
+    }
+}
+
+
+/* Person Name */
+.person-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #003366;
+    margin-bottom: 5px;
+}
+
+/* Person Title */
+.person-title {
+    font-size: 14px;
+    color: #666;
+}
+
+#im1, #im2, #im3, #im4 {
+    width: 200px;
+    height: 200px;
+}
+
+/*  social icons */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px; /* Space from the person title */
+}
+
+.social-icon {
+    width: 30px; /* Adjust size as needed */
+    height: 30px;
+    margin: 0 5px; /* Space between icons */
+    transition: opacity 0.3s ease;
+}
+
+.social-icon:hover {
+    opacity: 0.8; /* Slightly fade on hover for feedback */
+}
+
+@media screen and (max-width: 768px) {
+    :root {
+        --sidebar-width: 60px;
+        --topbar-height: 50px;
+    }
+
+    .nav-img {
+        width: 24px;
+        height: 24px;
+    }
+}  
+
+@media screen and (max-width: 480px) {
+    .container {
+        grid-template-areas:
+        "topbar"
+        "main";
+        grid-template-columns: 1fr;
     }
 }
