@@ -1,1 +1,1 @@
-# juridical_chatbot
+# Istichara AI
