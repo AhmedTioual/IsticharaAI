@@ -122,8 +122,8 @@ def process_chat_query(user_message):
     """
     try:
         model = get_chat_model()  # Get the initialized model
-        if user_message.lower() == "hello":
-            return "Hello! How can I assist you with legal queries?"
+        if user_message.lower() == "سلام":
+            return "سلام! كيفاش بغيتي نعاونك ليوما"
         else:
             # Use the model to generate a response
             response = rag_pipeline(user_message)

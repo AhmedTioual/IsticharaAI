@@ -3,21 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juridical Chatbot</title>
+    <title>ISTICHARA AI</title>
+     <!-- FontAwesome for icons -->
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/law.png" type="image/x-icon">
+    <style>
+        /* Chat Bubble Styles */
+        .bot-message, .user-message {
+            position: relative;
+        }
+
+        /* Bot Icon (Top-Left) */
+        .bot-message::before {
+            content: '\f544'; /* Font Awesome Robot Icon */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            background-color: #f1f1f1;
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #888888;
+            font-size: 14px;
+        }
+
+        /* User Icon (Top-Right) */
+        .user-message::after {
+            content: '\f007'; /* Font Awesome User Icon */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #003366;
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <!-- Left Nav Bar -->
         <nav class="sidebar">
+            <!-- Logo at the top of the sidebar -->
+            <div class="logo-container">
+                <img src="assets/logo-3.png" alt="ISTICHARA LOGO" class="logo" style="height: 20px;
+                width: 60px;
+                padding-top: 20px;">
+            </div>
+        
             <!-- Navigation Icons -->
             <ul class="nav-icons">
-                <li><img src="assets/chat-icon.png" alt="Chat" onclick="showChat()"></li>
-                <li><img src="assets/voice-chat-icon.png" alt="Voice Chat" onclick="showVoiceChat()"></li>
-                <li><img src="assets/history-icon.png" alt="History"></li>
-                <li><img src="assets/data-source-icon.png" alt="Data Source"></li>
-                <li><img src="assets/about-icon.png" alt="About Us"></li>
+                <li class="active" onclick="showChat()"><img src="assets/chat-icon.png" alt="Chat"></li>
+                <li onclick="showVoiceChat()"><img src="assets/voice-chat-icon.png" alt="Voice Chat"></li>
+                <li onclick="showHistory()"><img src="assets/history-icon.png" alt="History"></li>
+                <li onclick="showDataSource()"><img src="assets/data-source-icon.png" alt="Data Source"></li>
+                <li onclick="showAboutUs()"><img src="assets/about-icon.png" alt="About Us"></li>
             </ul>
         </nav>
 
@@ -41,22 +96,115 @@
             <!-- Chat Input -->
             <div class="chat-input">
                 <input type="text" id="user-input" placeholder="Type your question...">
-                <button id="send-button">➤</button>
+                <button id="send-button">➤
             </div>
         </main>
 
         <!-- Voice Chat Content -->
         <div id="voice-chat-content" class="voice-chat-content" style="display: none;">
             <div class="voice-chat-container">
-                <h2>Voice Chat is Active</h2>                
+                <h2 style="color:#003366 ;">محتاج شي حاجة هضر معايا</h2>                
                 <!-- Circular Button for Recording -->
                 <button id="record-btn" class="record-btn" onclick="toggleRecording()">
                     🎙️
                 </button>
             </div>
         </div>
+        
+        <div id="history-content" class="history-content" style="display: none;">
+            <div class="history-content-container">
+                <h2 style="color:#003366 ;">... قريبا</h2>                
+            </div>
+        </div>
+
+        <!-- Data Source Content Section -->
+        <div id="data-source-content" class="data-source-content" style="display: none;">
+            <h2 style="color:#003366 ;">مصادر البيانات</h2>  
+            <!-- Grid for displaying themes as cards -->
+            <div class="data-source-container" id="gridThemesContent">
+                <!-- Cards will be dynamically added here -->
+            </div>
+        </div>
+
+        <!-- Details Section (hidden initially) -->
+        <div id="details-content" class="details-content" style="display: none;">
+            <h2 id="details-item-heading"style="color:#003366 ;"></h2>
+            <div id="details-item-title"></div>
+            <button onclick="goBack()" id="details-back-button">
+                <img src="assets/left-arrow-w.png" alt="Back Arrow" id="back-icon"> رجوع
+            </button>
+        </div>
+
+        <div id="about-us-content" class="about-us-content" style="display: none;">
+            <div class="about-us-container">
+                <h2 style="color:#003366 ;">معلومات عنا</h2>
+                <div class="grid-about">
+                    <!-- Person 1 -->
+                    <div class="card-about">
+                        <img src="assets/oualid.png" alt="Person 1" id="im1" class="person-image">
+                        <h3 class="person-name">OUALID AIT AISSA</h3>
+                        <p class="person-title">Master in Data Science</p>
+                        <div class="social-icons">
+                            <a href="https://www.linkedin.com/in/oualid-ait-aissa-914643239/" target="_blank">
+                                <img src="assets/linkedin-icon.png" alt="LinkedIn" class="social-icon">
+                            </a>
+                            <a href="https://github.com/MOULAY-Oualid" target="_blank">
+                                <img src="assets/github-icon.png" alt="GitHub" class="social-icon">
+                            </a>
+                        </div>
+                    </div>
     
+                    
+                    <!-- Person 2 -->
+                    <div class="card-about">
+                        <img src="assets/ahmed.png" alt="Person 2" id="im2" class="person-image">
+                        <h3 class="person-name">AHMED TIOUAL</h3>
+                        <p class="person-title">Master in Data Science</p>
+                        <div class="social-icons">
+                            <a href="https://www.linkedin.com/in/ahmed-tioual/" target="_blank">
+                                <img src="/assets/linkedin-icon.png" alt="LinkedIn" class="social-icon">
+                            </a>
+                            <a href="https://github.com/AhmedTioual" target="_blank">
+                                <img src="/assets/github-icon.png" alt="GitHub" class="social-icon">
+                            </a>
+                        </div>
+                    </div>
+    
+                    <!-- Person 3 -->
+                    <div class="card-about">
+                        <img src="assets/youssef.png" alt="Person 3" id="im3" class="person-image">
+                        <h3 class="person-name">YOUSSEF HIDSI</h3>
+                        <p class="person-title">Master in Data Science</p>
+                        <div class="social-icons">
+                            <a href="https://www.linkedin.com/in/youssef-hidsi-372106251/" target="_blank">
+                                <img src="/assets/linkedin-icon.png" alt="LinkedIn" class="social-icon">
+                            </a>
+                            <a href="#" target="_blank">
+                                <img src="/assets/github-icon.png" alt="GitHub" class="social-icon">
+                            </a>
+                        </div>
+                    </div>
+    
+                    <!-- Person 4 -->
+                    <div class="card-about">
+                        <img src="assets/moad.png" alt="Person 4" id="im4" class="person-image">
+                        <h3 class="person-name">MOADE ARSALANE</h3>
+                        <p class="person-title">Master in Data Science</p>
+                        <div class="social-icons">
+                            <a href="https://www.linkedin.com/in/arsalane-moad-2b596323a/" target="_blank">
+                                <img src="/assets/linkedin-icon.png" alt="LinkedIn" class="social-icon">
+                            </a>
+                            <a href="#" target="_blank">
+                                <img src="/assets/github-icon.png" alt="GitHub" class="social-icon">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>                
+            </div>
+        </div>
     </div>
     <script src="js/script.js"></script>
+    <script src="js/themes.js"></script>
 </body>
 </html>

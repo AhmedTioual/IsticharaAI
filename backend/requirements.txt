@@ -1,0 +1,5 @@
+django
+django-cors-headers
+langchain_groq 
+pinecone
+langchain_community
