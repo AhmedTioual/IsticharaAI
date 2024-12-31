@@ -7,10 +7,7 @@
     },
     {
       "src": "backend/juridical_chatbot/wsgi.py",
-      "use": "@vercel/python",
-      "config": {
-        "maxLambdaSize": "15mb"
-      }
+      "use": "@vercel/python"
     }
   ],
   "routes": [
