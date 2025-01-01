@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+from whitenoise import WhiteNoise
 from pathlib import Path
 import os
 
@@ -27,7 +28,7 @@ SECRET_KEY = 'django-insecure-t0l18!ww)zzhi13#d)(k^odp(5x-(sm_9ebh3^w!v$h3v680t%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['isticharaai.vercel.app', '.vercel.app','*']
+ALLOWED_HOSTS = ['isticharaai.vercel.app', '.vercel.app']
 
 # Application definition
 
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -53,8 +55,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Allow all origins (for development only)
-CORS_ALLOW_ALL_ORIGINS = True
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# CORS configuration for development (adjust for production)
+CORS_ALLOWED_ORIGINS = [
+    "https://isticharaai.vercel.app",
+]
+
+# Allow all origins for testing purposes (remove in production)
+CORS_ALLOW_ALL_ORIGINS = False
 
 ROOT_URLCONF = 'juridical_chatbot.urls'
 
@@ -122,7 +131,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend/assets'),
@@ -131,14 +139,7 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# CORS configuration
-CORS_ALLOW_ALL_ORIGINS = True
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-CORS_ALLOWED_ORIGINS = [
-    "https://isticharaai.vercel.app",
-]
