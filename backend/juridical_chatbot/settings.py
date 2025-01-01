@@ -23,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-t0l18!ww)zzhi13#d)(k^odp(5x-(sm_9ebh3^w!v$h3v680t%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-# Add your domain and localhost to ALLOWED_HOSTS
-ALLOWED_HOSTS = ['isticharaai.vercel.app', '127.0.0.1', '.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app']
 
 # Application definition
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -36,13 +36,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'chatbot',  # Ensure this is listed correctly
+    'chatbot',
     'corsheaders',
 ]
 
-# Middleware for CORS and other security features
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # Make sure this is at the top for proper CORS handling
+    'corsheaders.middleware.CorsMiddleware',  # Add this at the top
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -53,20 +52,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Allowing CORS from specified origins
-CORS_ALLOWED_ORIGINS = [
-    'https://isticharaai.vercel.app',  # Your production domain
-    'https://*.vercel.app',  # Any subdomain under vercel.app
-    'http://127.0.0.1:8000',  # Allow localhost for local development
-]
+# Allow all origins (for development only)
+CORS_ALLOW_ALL_ORIGINS = True
 
-# Security settings
-SECURE_SSL_REDIRECT = True  # Redirect HTTP to HTTPS in production
-SECURE_BROWSER_XSS_FILTER = True  # Enable XSS protection in browsers
-SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevent sniffing attacks
-X_FRAME_OPTIONS = 'DENY'  # Prevent clickjacking attacks
-
-# Root URL configuration
 ROOT_URLCONF = 'juridical_chatbot.urls'
 
 TEMPLATES = [
@@ -139,11 +127,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-import os
-
-# Path to store collected static files
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-
-# Ensure you have this setting for static files URL
-STATIC_URL = '/static/'

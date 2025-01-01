@@ -1,10 +1,18 @@
+"""
+WSGI config for juridical_chatbot project.
+
+It exposes the WSGI callable as a module-level variable named ``application``.
+
+For more information on this file, see
+https://docs.djangoproject.com/en/5.1/howto/deployment/wsgi/
+"""
+
 import os
+
 from django.core.wsgi import get_wsgi_application
 
-# Make sure to reference the correct path to settings
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.juridical_chatbot.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'juridical_chatbot.settings')
 
 application = get_wsgi_application()
 
-# Export 'application' for Vercel
 app = application
