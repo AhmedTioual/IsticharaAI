@@ -36,6 +36,6 @@ If you are serving static files or frontend components separately, use the built
 
 ```bash
 cd frontend
-python -m http.server 8000
+python -m http.server 8001
 ```
-This will serve static files at http://127.0.0.1:8000/.
+This will serve static files at http://127.0.0.1:8001/.
