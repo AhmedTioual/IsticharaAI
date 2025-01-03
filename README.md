@@ -35,6 +35,7 @@ This will start the server at http://127.0.0.1:8000/.
 If you are serving static files or frontend components separately, use the built-in Python HTTP server:
 
 ```bash
+cd frontend
 python -m http.server 8000
 ```
 This will serve static files at http://127.0.0.1:8000/.
