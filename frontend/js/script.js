@@ -137,7 +137,9 @@ async function sendMessage() {
         if (response.ok) {
             // Clean the response by removing leading whitespace or newlines
             let cleanedResponse = data.response.trim();  // Removes leading and trailing whitespace/newlines
-            
+
+            cleanedResponse.replace(/[^\u0600-\u06FF\u0041-\u005A\u0061-\u007A\u0030-\u0039\s.,:؛،\n]/g, '');
+
             // Replace multiple consecutive <br> tags with just one <br>
             cleanedResponse = cleanedResponse.replace(/<br\s*\/?>\s*<br\s*\/?>+/g, '<br>');
         
