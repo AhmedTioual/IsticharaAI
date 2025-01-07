@@ -110,7 +110,7 @@ def rag_pipeline(user_message):
     result = chain.invoke({'context': context, 'question': user_message})
     
     # Remove non-Arabic, non-English, and non-numeric characters
-    response = re.sub(r'[^\u0600-\u06FF\u0750-\u077F\u0080-\u00FF\u0041-\u007A\u0030-\u0039\s.,:؛،\n]', '', result)
+    response = re.sub(r'[^\u0600-\u06FF\u0750-\u077F\u0041-\u005A\u0061-\u007A\u0030-\u0039\s.,:؛،\n]', '', result)
     
     # Apply formatting to the result string
     result = result.replace("\n", "<br>").replace(":", ":<br>").replace("1.", "<br>1.")
