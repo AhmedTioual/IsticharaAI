@@ -42,7 +42,7 @@ def get_embeddings(texts):
 # Initialize the ChatGroq model
 def get_chat_model():
     model = ChatGroq(
-        groq_api_key="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",
+        groq_api_key="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",
         model_name="llama-3.1-70b-versatile"
     )
     return model
